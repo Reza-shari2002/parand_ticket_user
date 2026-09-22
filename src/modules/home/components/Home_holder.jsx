@@ -22,7 +22,7 @@ function Home_holder() {
         >
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-cyan-50/60 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform overflow-hidden relative">
             <img
-              src="/assets/gamepad.png"
+              src="/game.png"
               alt="پرند کاپ"
               className="w-11 h-11 sm:w-14 sm:h-14 object-contain relative z-10"
               onError={(e) => {

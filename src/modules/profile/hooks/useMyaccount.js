@@ -23,7 +23,8 @@ export default function useMyaccount() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("accesstoken");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("token");
     window.location.href = "https://core.parand.app/";
   };

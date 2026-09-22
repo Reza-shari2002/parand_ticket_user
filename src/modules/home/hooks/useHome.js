@@ -7,7 +7,7 @@ export default function useHome() {
   const { isLoading, showProfileModal, closeProfileModal } =
     useProfileChecker();
 
-  const goToParandCup = () => navigate("/parand-cup");
+  const goToParandCup = () => navigate("/Selectticket");
 
   return {
     isLoading,

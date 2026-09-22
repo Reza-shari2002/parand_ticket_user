@@ -8,7 +8,7 @@ function Formcontext({ children }) {
   const [captchaToken, set_captcha_token] = useState("");
   const [phone_number, set_phone_number] = useState("");
   const [otp, set_otp] = useState("");
-
+  const [ticket_type , set_ticket_type] = useState("gamer");
   // استیت مربوط به پیام Toast
   const [toast, setToast] = useState(null);
   const timerRef = useRef(null);
@@ -41,6 +41,8 @@ function Formcontext({ children }) {
         otp,
         set_otp,
         showToast,
+        ticket_type , 
+        set_ticket_type
       }}
     >
       {children}
