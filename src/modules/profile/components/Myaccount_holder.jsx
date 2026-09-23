@@ -50,7 +50,7 @@ function Myaccount_holder() {
         >
           {/* سمت راست: آیکون و عنوان */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-500">
+            <div className="w-9 h-9 rounded-xl bg-cyan-50 flex items-center justify-center text-[#8B9EFF]">
               <UserPen size={19} />
             </div>
             <span className="text-sm font-bold text-gray-700">
@@ -70,7 +70,7 @@ function Myaccount_holder() {
         >
           {/* سمت راست: آیکون و عنوان */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-500">
+            <div className="w-9 h-9 rounded-xl bg-cyan-50 flex items-center justify-center text-[#8B9EFF]">
               <PhoneCall size={19} />
             </div>
             <span className="text-sm font-bold text-gray-700">
@@ -90,7 +90,7 @@ function Myaccount_holder() {
         >
           {/* سمت راست: آیکون و عنوان */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-50 group-hover:bg-red-50 flex items-center justify-center text-cyan-500 group-hover:text-red-500 transition-colors">
+            <div className="w-9 h-9 rounded-xl bg-cyan-50 group-hover:bg-red-50 flex items-center justify-center text-[#8B9EFF] group-hover:text-red-500 transition-colors">
               <LogOut size={19} className="rotate-180" />
             </div>
             <span className="text-sm font-bold text-gray-700 group-hover:text-red-500 transition-colors">

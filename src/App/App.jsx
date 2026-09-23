@@ -8,6 +8,7 @@ import Home from "../modules/home/pages/Home";
 import Myaccount from "../modules/profile/pages/Myaccount"
 import Editprofile from "../modules/profile/pages/Editprofile"
 import SelectTicket from "../modules/ticket/pages/SelectTicket";
+import ReservetTicket from "../modules/ticket/pages/ReserveTicket";
 import Documents from "../modules/third-party-insurance/pages/Documents";
 import Basic_information from "../modules/third-party-insurance/pages/Basic_information";
 import Discount_transfer from "../modules/third-party-insurance/pages/Discount_transfer";
@@ -32,6 +33,7 @@ function App() {
     {path:"/Myaccount" , element : <Myaccount></Myaccount>} , 
     {path:"/Editprofile" , element:<Editprofile></Editprofile>} ,
     {path:"/Selectticket" , element:<SelectTicket></SelectTicket>},
+    {path:"/Reserve" , element:<ReservetTicket></ReservetTicket>},
     {path:"/login" , element:<Login></Login>} ,
     {path:"/verify" , element:<Verify_otp></Verify_otp>}  , 
     { path: "/documents", element: <Documents /> },

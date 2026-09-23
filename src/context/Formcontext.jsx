@@ -8,8 +8,9 @@ function Formcontext({ children }) {
   const [captchaToken, set_captcha_token] = useState("");
   const [phone_number, set_phone_number] = useState("");
   const [otp, set_otp] = useState("");
-  const [ticket_type , set_ticket_type] = useState("gamer");
-  // استیت مربوط به پیام Toast
+  const [ticket_type, set_ticket_type] = useState("gamer");
+  const [ticketId, set_ticketId] = useState(null);
+  const [reserveData, setReserveData] = useState(null); // استیت مربوط به پیام Toast
   const [toast, setToast] = useState(null);
   const timerRef = useRef(null);
 
@@ -41,8 +42,12 @@ function Formcontext({ children }) {
         otp,
         set_otp,
         showToast,
-        ticket_type , 
-        set_ticket_type
+        ticket_type,
+        set_ticket_type,
+        ticketId,
+        set_ticketId,
+        reserveData,
+        setReserveData,
       }}
     >
       {children}
@@ -54,7 +59,10 @@ function Formcontext({ children }) {
             className={`pointer-events-auto w-full max-w-[390px] bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 transform translate-y-0`}
           >
             {/* بدنه پیام */}
-            <div className="flex items-center justify-between px-5 py-3.5" dir="rtl">
+            <div
+              className="flex items-center justify-between px-5 py-3.5"
+              dir="rtl"
+            >
               {/* متن پیام */}
               <span className="text-sm font-semibold text-gray-800">
                 {toast.message}

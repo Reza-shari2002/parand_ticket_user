@@ -33,10 +33,7 @@ function SelectTicket_holder() {
   return (
     <div className="px-5 py-6 flex flex-col gap-4">
       {/* عنوان صفحه با خط زیرین دکوری */}
-      <div className="text-center mb-2">
-        <h1 className="text-xl font-black text-gray-800">انتخاب نوع بلیط</h1>
-        <div className="w-12 h-1 bg-blue-600 rounded-full mx-auto mt-2" />
-      </div>
+
 
       {/* لیست کارت‌ها */}
       <div className="space-y-3.5">

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import useHome from "../hooks/useHome";
 import CompleteProfileModal from "../../profile/components/CompleteProfileModal";
 import LoadingScreen from "../../../components/common/LoadingScreen";
@@ -9,7 +10,7 @@ function Home_holder() {
 
   if (isLoading) return <LoadingScreen />;
 
-  const emptySlots = Array.from({ length: 8 });
+  const emptySlots = Array.from({ length: 5 });
 
   return (
     <div className="flex flex-col min-h-full p-4 sm:p-5 gap-4">
@@ -45,46 +46,19 @@ function Home_holder() {
           />
         ))}
       </div>
-
-      {/* بنر مسابقات پرند کاپ */}
-      <div
-        onClick={goToParandCup}
-        className="relative w-full min-h-[145px] sm:min-h-[165px] rounded-3xl overflow-hidden cursor-pointer active:scale-[0.99] transition-all shadow-xl shadow-cyan-900/10 bg-gradient-to-l from-[#0b132b] via-[#1c2541] to-[#1e1b4b] flex items-center justify-between p-5 sm:p-6 text-white border border-cyan-500/20"
-      >
-        <div className="absolute -left-10 -bottom-10 w-36 h-36 bg-[#00FFD6]/15 rounded-full blur-2xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col items-start gap-1 sm:gap-2 max-w-[60%]">
-          <span className="text-xs sm:text-sm font-bold text-gray-300">
-            مسابقات بزرگ
-          </span>
-          <span className="text-2xl sm:text-3xl font-black text-[#00FFD6] tracking-wide drop-shadow">
-            پرند کاپ
-          </span>
-          <span className="text-[11px] sm:text-xs text-cyan-200/80 mt-1">
-            ثبت‌نام و رزرو مستقیم بلیت
-          </span>
-        </div>
-
-        <div className="relative z-10 flex items-center justify-end gap-1 sm:gap-2 pointer-events-none">
+      {/* بنر کلیک‌خور برای هدایت مستقیم به انتخاب بلیط */}
+      <div className="w-full px-4 pt-3 pb-2">
+        <Link
+          to="/Selectticket"
+          className="block relative w-full aspect-[21/9] sm:aspect-[2.4/1] rounded-3xl overflow-hidden shadow-md shadow-blue-500/10 border border-gray-100/80 bg-gray-50 active:scale-[0.98] transition-transform duration-150"
+        >
           <img
-            src="/assets/trophy.png"
-            alt="کاپ مسابقات"
-            className="w-12 h-12 sm:w-16 sm:h-16 object-contain drop-shadow-lg"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-            }}
+            src="/parandcup_banner.png"
+            alt="بنر مسابقات پرند کاپ"
+            className="w-full h-full object-cover select-none pointer-events-none"
           />
-          <img
-            src="/assets/gamepad.png"
-            alt="دسته بازی"
-            className="w-14 h-14 sm:w-20 sm:h-20 object-contain drop-shadow-lg"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-            }}
-          />
-        </div>
+        </Link>
       </div>
-
       {/* مودال تکمیل اطلاعات */}
       <CompleteProfileModal
         isOpen={showProfileModal}
