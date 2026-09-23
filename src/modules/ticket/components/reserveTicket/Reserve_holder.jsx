@@ -38,7 +38,7 @@ function Reserve_holder() {
           </p>
 
           <div className="pt-1">
-            <span className="inline-block px-3 py-1 bg-blue-50 text-[#8B9EFF] font-extrabold text-xs rounded-xl">
+            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 font-extrabold text-xs rounded-xl">
               {formatPrice(ticketInfo.price)} تومان برای هر نفر
             </span>
           </div>
@@ -62,7 +62,7 @@ function Reserve_holder() {
             className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-sm ${
               count <= 1
                 ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-                : "bg-blue-50 hover:bg-blue-100 text-[#8B9EFF] active:scale-95"
+                : "bg-blue-50 hover:bg-blue-100 text-blue-600 active:scale-95"
             }`}
           >
             <Minus size={20} />
@@ -81,7 +81,7 @@ function Reserve_holder() {
             className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-sm ${
               count >= maxAllowed
                 ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-                : "bg-[#8B9EFF] hover:bg-[#8B9EFF] text-white shadow-blue-500/30 active:scale-95"
+                : "bg-blue-600 hover:bg-blue-600 text-white shadow-blue-500/30 active:scale-95"
             }`}
           >
             <Plus size={20} />
