@@ -8,3 +8,8 @@ export const reserveTicketApi = async (type, count) => {
   });
   return response.data;
 };
+
+export const requestPaymentApi = async (ticketId) => {
+  const response = await axiosInstance.post("/payment/request", { ticketId });
+  return response.data;
+};
