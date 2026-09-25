@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock, Copy, Check, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { Clock, Copy, Check, ShieldCheck, CheckCircle2  , Ticket} from "lucide-react";
 import usePayment from "../../hooks/usePayment";
 
 export default function Payment_holder() {

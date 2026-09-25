@@ -13,3 +13,8 @@ export const requestPaymentApi = async (ticketId) => {
   const response = await axiosInstance.post("/payment/request", { ticketId });
   return response.data;
 };
+
+export const getTicketDetailsApi = async (ticketId) => {
+  const response = await axiosInstance.get(`/tickets/${ticketId}`);
+  return response.data;
+};

@@ -23,6 +23,7 @@ import Verify_otp from "../modules/auth/pages/Verify_otp.";
 import Formcontext from "../context/Formcontext";
 import NotFound from "../modules/not-found/pages/NotFound";
 import Payment from "../modules/ticket/pages/Payment";
+import PaymentResult from  "../modules/ticket/pages/PaymentResult"; 
 function App() {
   const router = createBrowserRouter([
     {
@@ -35,6 +36,7 @@ function App() {
     {path:"/Editprofile" , element:<Editprofile></Editprofile>} ,
     {path:"/Selectticket" , element:<SelectTicket></SelectTicket>},
     {path:"/Reserve" , element:<ReservetTicket></ReservetTicket>},
+    {path : "/payment/result" , element :<PaymentResult></PaymentResult>} ,
     {path:"/payment" , element:<Payment></Payment>},
     {path:"/login" , element:<Login></Login>} ,
     {path:"/verify" , element:<Verify_otp></Verify_otp>}  , 

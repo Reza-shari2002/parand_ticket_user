@@ -27,7 +27,7 @@ function Layout({ children, hideNav = false, customTitle }) {
     >
       <div className="w-full max-w-[430px] min-h-screen bg-[#fafafa] shadow-2xl relative flex flex-col">
         {/* Header */}
-        <header className="sticky top-0 h-20 flex items-center justify-between px-6 border-b border-gray-100 bg-white z-20 shadow-sm">
+        <header className="sticky top-0 h-16 flex items-center justify-between px-6 border-b border-gray-100 bg-white z-20 shadow-sm">
           {/* دکمه برگشت */}
           <button
             type="button"
