@@ -26,20 +26,23 @@ function Layout({ children, hideNav = false, customTitle }) {
       className="min-h-screen w-full bg-gray-100 flex justify-center font-vazir text-right"
     >
       <div className="w-full max-w-[430px] min-h-screen bg-[#fafafa] shadow-2xl relative flex flex-col">
-        {/* Header */}
-        <header className="sticky top-0 h-16 flex items-center justify-between px-6 border-b border-gray-100 bg-white z-20 shadow-sm">
-          {/* دکمه برگشت */}
+        {/* Header با پس‌زمینه تصویر */}
+        <header
+          className="sticky top-0 h-20 flex items-center justify-between px-6 z-20 shadow-md bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/header.png')" }}
+        >
+          {/* دکمه برگشت مات/شیشه‌ای */}
           <button
             type="button"
             onClick={gotoPrevpage}
             aria-label="بازگشت"
-            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-gray-50 hover:bg-gray-100 text-gray-700 active:scale-95 transition"
+            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm active:scale-95 transition"
           >
             <ChevronRight size={22} />
           </button>
 
           {/* عنوان هدر */}
-          <span className="text-lg font-black text-gray-800">
+          <span className="text-lg font-black text-white drop-shadow-md">
             {customTitle || "پرند بلیط"}
           </span>
 
@@ -52,7 +55,7 @@ function Layout({ children, hideNav = false, customTitle }) {
           {children}
         </main>
 
-        {/* Bottom Navigation (فقط در صورتی که hideNav برابر false باشد نمایش داده می‌شود) */}
+        {/* Bottom Navigation */}
         {!hideNav && (
           <nav className="fixed bottom-0 w-full max-w-[430px] h-20 bg-white border-t border-gray-100 flex items-center z-30 shadow-lg">
             <div className="flex flex-1 justify-around items-center h-full">

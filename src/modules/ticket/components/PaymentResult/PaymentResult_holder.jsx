@@ -1,6 +1,8 @@
 import React from "react";
 import { CheckCircle2, XCircle, Download, Ticket, Loader2 } from "lucide-react";
 import usePaymentStatus from "../../hooks/usePaymentStatus";
+// مسیر فایل events رو متناسب با ساختار پروژه‌ات تنظیم کن:
+import { events } from "../../../../utils/eventsData"; 
 
 export default function PaymentResult_holder() {
   const {
@@ -46,6 +48,12 @@ export default function PaymentResult_holder() {
     return type || "-";
   };
 
+  // پیدا کردن مشخصات رویداد متناسب با نوع بلیط
+  const eventInfo = events.find((e) => e.type === ticketData?.type);
+  const eventDate = eventInfo?.date || "۳۰ مهر ۱۴۰۵";
+  const eventTime = eventInfo?.time || "";
+  const eventDateTimeText = eventTime ? `${eventDate} | ساعت ${eventTime}` : eventDate;
+
   // وضعیت موفق
   return (
     <div className="flex flex-col gap-3 px-5 py-6">
@@ -72,6 +80,10 @@ export default function PaymentResult_holder() {
         <div className="border-t border-dashed my-2" />
 
         <DetailRow label="نوع بلیط" value={getTicketTypeLabel(ticketData?.type)} />
+        
+        {/* ردیف جدید: تاریخ و زمان برگزاری رویداد */}
+        <DetailRow label="تاریخ و ساعت رویداد" value={eventDateTimeText} />
+
         <DetailRow label="تعداد" value={`${ticketData?.quantity || 1} نفر`} />
         <DetailRow
           label="صندلی‌ها"

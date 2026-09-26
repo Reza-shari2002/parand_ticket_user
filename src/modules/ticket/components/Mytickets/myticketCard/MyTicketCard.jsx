@@ -1,5 +1,6 @@
 import React from "react";
 import { Gamepad2, Trophy, Ticket as TicketIcon } from "lucide-react";
+import { events } from "../../../../../utils/eventsData";
 
 export default function MyTicketCard({ ticket, onOpenDetails }) {
   // آیکون متناسب با نوع بلیط یا رویداد
@@ -15,9 +16,9 @@ export default function MyTicketCard({ ticket, onOpenDetails }) {
     return "عادی";
   };
 
-  const formattedDate = ticket?.created_at
-    ? new Date(ticket.created_at).toLocaleDateString("fa-IR")
-    : "۲۸ مهر ۱۴۰۵";
+  // پیدا کردن تاریخ برگزاری رویداد بر اساس نوع بلیط (type)
+  const eventInfo = events.find((e) => e.type === ticket?.type);
+  const eventDate = eventInfo?.date || "۲۸ مهر ۱۴۰۵";
 
   return (
     <div className="relative bg-white rounded-3xl p-5 shadow-sm border border-blue-50/80 flex flex-col gap-3">
@@ -25,20 +26,16 @@ export default function MyTicketCard({ ticket, onOpenDetails }) {
       <div className="flex items-start justify-between">
         {/* سمت راست: بج و عناوین */}
         <div className="flex flex-col items-start gap-1.5 flex-1 pl-2">
-          <span className="bg-blue-500 text-white text-[11px] font-bold px-3 py-0.5 rounded-full">
-            {ticket?.status === "paid" ? "فعال" : "نامشخص"}
-          </span>
-
           <h3 className="font-black text-gray-800 text-sm mt-1">
-            مسابقات پرند کاپ {ticket?.type === "vip" ? "- مرحله نهایی" : ""}
+            مسابقات پرند کاپ
           </h3>
 
           <p className="text-[11px] text-gray-400 font-medium">
-            {formattedDate} | {getTicketTypeLabel(ticket?.type)}
+            {eventDate} | {getTicketTypeLabel(ticket?.type)}
           </p>
 
           <span className="font-black text-blue-600 text-sm mt-0.5">
-            {Number(ticket?.total_amount || 0).toLocaleString("fa-IR")} تومان
+            {Number(ticket?.total_amount || 0).toLocaleString("fa-IR")} ریال
           </span>
         </div>
 

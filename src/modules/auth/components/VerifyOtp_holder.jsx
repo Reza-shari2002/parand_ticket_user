@@ -24,12 +24,13 @@ function VerifyOtp_holder() {
   const { ref: formRegisterRef, ...restRegister } = register("otp");
 
   return (
-    <div className="min-h-screen w-full bg-[#fafafa] flex justify-center items-center">
-      <div className="w-full max-w-[430px] h-[100dvh] bg-white flex flex-col justify-between px-6 py-10 relative overflow-hidden shadow-2xl">
+    <div className="min-h-screen w-full bg-slate-50 flex justify-center items-center select-none">
+      {/* ظرف اصلی هماهنگ با سایز موبایل */}
+      <div className="w-full max-w-[430px] min-h-[100dvh] bg-white flex flex-col items-center justify-center px-6 py-8 shadow-2xl relative">
         
-        {/* هدر: عنوان و دکمه‌ها با z-30 و Pointer events برای کلیک‌پذیری ۱۰۰٪ */}
-        <div className="relative z-30">
-          <div className="flex items-center justify-between mt-4">
+        {/* ۱. هدر: عنوان و دکمه تغییر شماره / ارسال مجدد */}
+        <div className="w-full mb-8">
+          <div className="flex items-center justify-between">
             <h1 className="text-xl font-black text-gray-900">
               کد تایید را وارد کنید
             </h1>
@@ -39,7 +40,7 @@ function VerifyOtp_holder() {
                 type="button"
                 onClick={resendOtp}
                 disabled={isResending}
-                className="text-sm font-bold text-[#00cbb0] hover:text-[#00ab94] transition-colors cursor-pointer disabled:opacity-50"
+                className="text-xs sm:text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-colors cursor-pointer disabled:opacity-50"
               >
                 {isResending ? "در حال ارسال..." : "ارسال مجدد کد"}
               </button>
@@ -47,7 +48,7 @@ function VerifyOtp_holder() {
               <button
                 type="button"
                 onClick={goBackToLogin}
-                className="text-sm font-bold text-[#00cbb0] hover:text-[#00ab94] transition-colors cursor-pointer"
+                className="text-xs sm:text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-colors cursor-pointer"
               >
                 تغییر شماره موبایل
               </button>
@@ -56,21 +57,22 @@ function VerifyOtp_holder() {
 
           <p className="text-xs text-gray-400 mt-2">
             کد ارسال‌شده به{" "}
-            <span dir="ltr" className="font-bold text-gray-600">
+            <span dir="ltr" className="font-bold text-gray-700">
               {phone_number}
             </span>{" "}
             را وارد کنید
           </p>
         </div>
 
-        {/* فرم و باکس‌های OTP */}
-        <form onSubmit={handleSubmit} className="flex-1 flex flex-col items-center justify-center -mt-10 relative z-20">
+        {/* ۲. فرم: باکس‌های کد، تایمر و دکمه تایید */}
+        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-6">
+          {/* باکس‌های کد تایید */}
           <div
-            className="relative flex gap-2 justify-center cursor-pointer"
+            className="relative flex gap-2 sm:gap-2.5 justify-center w-full cursor-pointer"
             onClick={() => inputRef.current?.focus()}
             dir="ltr"
           >
-            {/* اینپوت فقط روی محدوده باکس‌ها قرار دارد */}
+            {/* اینپوت مخفی و شفاف برای دریافت تایپ و فوکوس */}
             <input
               {...restRegister}
               ref={(e) => {
@@ -98,18 +100,18 @@ function VerifyOtp_holder() {
               return (
                 <div
                   key={index}
-                  className={`w-12 h-14 rounded-2xl flex items-center justify-center text-xl font-black transition-all ${
+                  className={`w-11 h-13 sm:w-12 sm:h-14 rounded-2xl flex items-center justify-center text-lg sm:text-xl font-black transition-all ${
                     char
-                      ? "border border-gray-200 bg-gray-100/70 text-gray-900"
+                      ? "border border-cyan-300 bg-cyan-50/30 text-gray-900 shadow-sm"
                       : isCurrent
-                      ? "border-2 border-[#00FFD6] bg-white shadow-sm shadow-[#00FFD6]/30"
-                      : "border border-gray-100 bg-gray-100/60 text-gray-400"
+                      ? "border-2 border-cyan-400 bg-white ring-4 ring-cyan-100 shadow-sm"
+                      : "border border-gray-200 bg-gray-50/60 text-gray-400"
                   }`}
                 >
                   {char ? (
                     char
                   ) : isCurrent ? (
-                    <span className="w-0.5 h-6 bg-[#00FFD6] animate-pulse"></span>
+                    <span className="w-0.5 h-6 bg-cyan-500 animate-pulse"></span>
                   ) : null}
                 </div>
               );
@@ -117,36 +119,39 @@ function VerifyOtp_holder() {
           </div>
 
           {/* تایمر زمان باقی‌مانده */}
-          <div className="mt-8 flex items-center gap-2">
-            <span className="text-sm font-bold text-gray-400">
+          <div className="flex items-center gap-2">
+            <span className="text-xs sm:text-sm font-bold text-gray-400">
               زمان باقی‌مانده:
             </span>
             <span
               dir="ltr"
-              className={`text-sm font-black ${
-                canResend ? "text-gray-400" : "text-[#00cbb0]"
+              className={`text-xs sm:text-sm font-black ${
+                canResend ? "text-gray-400" : "text-cyan-600"
               }`}
             >
               {formatTime()}
             </span>
           </div>
-        </form>
 
-        {/* دکمه ارسال تایید نهایی */}
-        <div className="w-full pb-2 relative z-30">
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!isValid || isSubmitting}
-            className="w-full h-14 bg-[#00FFD6] text-gray-900 font-black text-base rounded-full shadow-lg shadow-[#00FFD6]/30 active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          >
-            {isSubmitting ? (
-              <span className="w-5 h-5 border-2 border-gray-900 border-t-transparent rounded-full animate-spin"></span>
-            ) : (
-              "تایید"
-            )}
-          </button>
-        </div>
+          {/* ۳. دکمه تایید نهایی */}
+          <div className="w-full mt-2">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!isValid || isSubmitting}
+              className="w-full h-13 sm:h-14 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-bold text-base rounded-2xl shadow-lg shadow-cyan-500/25 active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>در حال بررسی...</span>
+                </div>
+              ) : (
+                "تایید"
+              )}
+            </button>
+          </div>
+        </form>
 
       </div>
     </div>

@@ -4,6 +4,8 @@ import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import { context } from "../../../../../context/Formcontext";
 
+import { events } from "../../../../../utils/eventsData"; 
+
 export default function TicketDetailsModal({ ticket, onClose }) {
   const [downloading, setDownloading] = useState(false);
   const ticketRef = useRef(null);
@@ -22,13 +24,27 @@ export default function TicketDetailsModal({ ticket, onClose }) {
     ? ticket.seats.map((s) => s.seat_number).join("، ")
     : "-";
 
+  // رویداد مربوط به نوع بلیط
+  const eventInfo = events.find((e) => e.type === ticket?.type);
+
+  // تاریخ و ساعت رویداد (اگر بعداً ساعت هم اضافه کردی از همین الگو استفاده می‌کنیم)
+  // پیشنهاد: داخل events فیلد time هم داشته باشی؛ فعلاً اگر نبود با "-" نمایش می‌دیم
+  const eventDate = eventInfo?.date || "۳۰ مهر ۱۴۰۵";
+  const eventTime = eventInfo?.time || "-";
+  const eventDateTimeText =
+    eventTime === "-" ? eventDate : `${eventDate} | ساعت ${eventTime}`;
+
   // دانلود PDF بلیط
   const handleDownloadPdf = async () => {
     if (!ticketRef.current) return;
     try {
       setDownloading(true);
       const element = ticketRef.current;
-      const imgData = await toPng(element, { quality: 0.98, pixelRatio: 3, backgroundColor: "#ffffff" });
+      const imgData = await toPng(element, {
+        quality: 0.98,
+        pixelRatio: 3,
+        backgroundColor: "#ffffff",
+      });
 
       const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -83,6 +99,10 @@ export default function TicketDetailsModal({ ticket, onClose }) {
           <div className="border-t border-dashed border-gray-200 my-2" />
 
           <DetailRow label="نوع بلیط" value={getTicketTypeLabel(ticket.type)} />
+
+          {/* ردیف جدید: تاریخ و ساعت رویداد */}
+          <DetailRow label="تاریخ و ساعت رویداد" value={eventDateTimeText} />
+
           <DetailRow label="تعداد" value={`${ticket.quantity || 1} نفر`} />
           <DetailRow label="شماره صندلی‌ها" value={seatNumbers} />
           <DetailRow label="نام خریدار" value={ticket.full_name || "-"} />
