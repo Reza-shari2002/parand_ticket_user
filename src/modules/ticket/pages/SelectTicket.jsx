@@ -4,7 +4,7 @@ import SelectTicket_holder from "../components/selectTicket/SelectTicket_holder"
 
 function SelectTicket() {
   return (
-    <Layout hideNav={true} customTitle="انتخاب نوع بلیط">
+    <Layout hideNav={false} customTitle="انتخاب نوع بلیط">
       <SelectTicket_holder />
     </Layout>
   );

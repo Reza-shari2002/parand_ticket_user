@@ -18,3 +18,8 @@ export const getTicketDetailsApi = async (ticketId) => {
   const response = await axiosInstance.get(`/tickets/${ticketId}`);
   return response.data;
 };
+
+export const getMyTicketsApi = async () => {
+  const { data } = await axiosInstance.get("/tickets/my-tickets");
+  return data;
+};

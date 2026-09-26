@@ -23,9 +23,9 @@ function Home_holder() {
         >
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-cyan-50/60 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform overflow-hidden relative">
             <img
-              src="/game.png"
+              src="/daste_white_bg.png"
               alt="پرند کاپ"
-              className="w-11 h-11 sm:w-14 sm:h-14 object-contain relative z-10"
+              className="w-24 h-24 sm:w-14 sm:h-14 object-contain relative z-10"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}

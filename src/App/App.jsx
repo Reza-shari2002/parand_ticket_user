@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 
 import Home from "../modules/home/pages/Home";
-import Myaccount from "../modules/profile/pages/Myaccount"
-import Editprofile from "../modules/profile/pages/Editprofile"
+import Myaccount from "../modules/profile/pages/Myaccount";
+import Editprofile from "../modules/profile/pages/Editprofile";
 import SelectTicket from "../modules/ticket/pages/SelectTicket";
 import ReservetTicket from "../modules/ticket/pages/ReserveTicket";
 import Documents from "../modules/third-party-insurance/pages/Documents";
@@ -23,7 +23,8 @@ import Verify_otp from "../modules/auth/pages/Verify_otp.";
 import Formcontext from "../context/Formcontext";
 import NotFound from "../modules/not-found/pages/NotFound";
 import Payment from "../modules/ticket/pages/Payment";
-import PaymentResult from  "../modules/ticket/pages/PaymentResult"; 
+import PaymentResult from "../modules/ticket/pages/PaymentResult";
+import Myticket from "../modules/ticket/pages/Myticket";
 function App() {
   const router = createBrowserRouter([
     {
@@ -32,14 +33,15 @@ function App() {
     },
     ,
     { path: "/home", element: <Home></Home> },
-    {path:"/Myaccount" , element : <Myaccount></Myaccount>} , 
-    {path:"/Editprofile" , element:<Editprofile></Editprofile>} ,
-    {path:"/Selectticket" , element:<SelectTicket></SelectTicket>},
-    {path:"/Reserve" , element:<ReservetTicket></ReservetTicket>},
-    {path : "/payment/result" , element :<PaymentResult></PaymentResult>} ,
-    {path:"/payment" , element:<Payment></Payment>},
-    {path:"/login" , element:<Login></Login>} ,
-    {path:"/verify" , element:<Verify_otp></Verify_otp>}  , 
+    { path: "/Myaccount", element: <Myaccount></Myaccount> },
+    { path: "/Editprofile", element: <Editprofile></Editprofile> },
+    { path: "/Selectticket", element: <SelectTicket></SelectTicket> },
+    { path: "/Reserve", element: <ReservetTicket></ReservetTicket> },
+    { path: "/payment/result", element: <PaymentResult></PaymentResult> },
+    { path: "/payment", element: <Payment></Payment> },
+    { path: "/my-tickets", element: <Myticket></Myticket> },
+    { path: "/login", element: <Login></Login> },
+    { path: "/verify", element: <Verify_otp></Verify_otp> },
     { path: "/documents", element: <Documents /> },
     {
       path: "/basic-information",

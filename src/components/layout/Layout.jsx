@@ -67,9 +67,9 @@ function Layout({ children, hideNav = false, customTitle }) {
               </Link>
 
               <Link
-                to="/tickets"
+                to="/my-tickets"
                 className={`flex flex-col items-center gap-1 ${
-                  isActive("/tickets") ? "text-[#8B9EFF]" : "text-gray-400"
+                  isActive("/my-tickets") ? "text-[#8B9EFF]" : "text-gray-400"
                 }`}
               >
                 <Ticket size={22} />

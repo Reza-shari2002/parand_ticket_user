@@ -4,7 +4,7 @@ import Reserve_holder from "../components/reserveTicket/Reserve_holder";
 
 function ReservetTicket() {
   return (
-    <Layout hideNav={true} customTitle="انتخاب تعداد نفرات">
+    <Layout hideNav={false} customTitle="انتخاب تعداد نفرات">
       <Reserve_holder></Reserve_holder>
     </Layout>
   );
