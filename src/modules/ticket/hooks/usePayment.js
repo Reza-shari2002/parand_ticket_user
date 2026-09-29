@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { context } from "../../../context/Formcontext.jsx";
-import { requestPaymentApi } from "../services/reserveService.js";
+import { requestPaymentApi, getGeneralSettingsApi } from "../services/reserveService.js";
 
 export default function usePayment() {
   const navigate = useNavigate();
@@ -12,14 +12,59 @@ export default function usePayment() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // وضعیت و پیام تنظیمات کلی برای این نوع بلیت
+  const [ticketNotice, setTicketNotice] = useState({
+    message: "",
+    isActive: true,
+    loading: true,
+  });
+
   // تایمر بر اساس expiresInMinutes (پیش‌فرض ۱۰ دقیقه)
   const initialMinutes = reserveData?.expiresInMinutes || 10;
   const [timeLeft, setTimeLeft] = useState(initialMinutes * 60);
 
-  // اسکرول به بالا
+  // اسکرول به بالا و دریافت اطلاعات Setting
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+
+    const fetchSettings = async () => {
+      try {
+        const res = await getGeneralSettingsApi();
+        const settings = res?.data;
+
+        if (settings) {
+          const type = reserveData?.type?.toLowerCase();
+          let msg = "";
+          let activeStatus = 1;
+
+          if (type === "vip") {
+            msg = settings.vip_message;
+            activeStatus = settings.is_vip_active;
+          } else if (type === "gamer") {
+            msg = settings.gamer_message;
+            activeStatus = settings.is_gamer_active;
+          } else {
+            // regular یا پیش‌فرض
+            msg = settings.regular_message;
+            activeStatus = settings.is_regular_active;
+          }
+
+          setTicketNotice({
+            message: msg || "",
+            isActive: activeStatus === 1,
+            loading: false,
+          });
+        }
+      } catch (err) {
+        const errorMsg =
+          err?.response?.data?.message || "خطا در دریافت وضعیت تنظیمات سیستم";
+        showToast?.(errorMsg, "error");
+        setTicketNotice((prev) => ({ ...prev, loading: false }));
+      }
+    };
+
+    fetchSettings();
+  }, [reserveData?.type, showToast]);
 
   // مدیریت تایمر معکوس
   useEffect(() => {
@@ -97,6 +142,7 @@ export default function usePayment() {
     setSelectedGateway,
     loading,
     copied,
+    ticketNotice,
     handleCopyCode,
     handlePayment,
   };

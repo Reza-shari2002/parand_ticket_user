@@ -19,7 +19,7 @@ export default function useProfileChecker() {
       setUserProfile(user);
 
       // اگر فول‌نیم یا کد ملی نال/خالی بود، مودال تکمیل اطلاعات باز شود
-      if (!user?.full_name || !user?.national_code) {
+      if (!user?.full_name ) {
         setShowProfileModal(true);
       }
     } else {

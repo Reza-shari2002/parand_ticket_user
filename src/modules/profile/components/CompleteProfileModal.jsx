@@ -58,30 +58,7 @@ function CompleteProfileModal({ isOpen, onClose }) {
             )}
           </div>
 
-          {/* فیلد کد ملی */}
-          <div>
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 text-right">
-              کد ملی (۱۰ رقم)
-            </label>
-            <input
-              {...register("national_code")}
-              type="tel"
-              maxLength={10}
-              inputMode="numeric"
-              disabled={isSubmitting}
-              dir="ltr"
-              className={`w-full h-12 sm:h-13 px-4 rounded-xl bg-gray-50 border text-sm font-medium transition-all outline-none text-right tracking-widest ${
-                errors.national_code
-                  ? "border-red-400 focus:border-red-500 bg-red-50/20"
-                  : "border-gray-200 focus:border-[#00FFD6] focus:bg-white"
-              }`}
-            />
-            {errors.national_code && (
-              <p className="text-[11px] sm:text-xs text-red-500 mt-1.5 font-medium text-right">
-                {errors.national_code.message}
-              </p>
-            )}
-          </div>
+
 
           {/* دکمه ثبت اطلاعات */}
           <div className="pt-2 sm:pt-4">

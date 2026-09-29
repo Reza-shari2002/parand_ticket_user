@@ -1,5 +1,13 @@
 import React from "react";
-import { Clock, Copy, Check, ShieldCheck, CheckCircle2  , Ticket} from "lucide-react";
+import {
+  Clock,
+  Copy,
+  Check,
+  ShieldCheck,
+  CheckCircle2,
+  AlertCircle,
+  Megaphone,
+} from "lucide-react";
 import usePayment from "../../hooks/usePayment";
 
 export default function Payment_holder() {
@@ -11,6 +19,7 @@ export default function Payment_holder() {
     setSelectedGateway,
     loading,
     copied,
+    ticketNotice,
     handleCopyCode,
     handlePayment,
   } = usePayment();
@@ -29,10 +38,10 @@ export default function Payment_holder() {
 
   return (
     <div className="flex flex-col gap-4 px-5 py-3">
-      {/* باکس هشدار و تایمر رزرو موقت */}
+      {/* ۱. باکس هشدار و تایمر رزرو موقت */}
       <div className="flex items-center justify-between rounded-2xl border border-blue-100 bg-blue-50/60 p-3.5 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-200">
+          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-200 shrink-0">
             <Clock size={22} className="animate-pulse" />
           </div>
           <div>
@@ -46,12 +55,48 @@ export default function Payment_holder() {
         </div>
 
         {/* شمارشگر معکوس */}
-        <div className="flex min-w-[64px] items-center justify-center rounded-xl bg-blue-600 px-3 py-1.5 font-mono text-sm font-black text-white shadow-sm">
+        <div className="flex min-w-[64px] items-center justify-center rounded-xl bg-blue-600 px-3 py-1.5 font-mono text-sm font-black text-white shadow-sm shrink-0">
           {formatTime(timeLeft)}
         </div>
       </div>
 
-      {/* کارت جزئیات پیش‌فاکتور */}
+      {/* ۲. تابلوی پیغام داینامیک وضعیت بلیت (زرد/سبز) */}
+      {ticketNotice?.message && (
+        <div
+          className={`flex items-center gap-3 rounded-2xl p-3.5 border transition-all duration-300 animate-in fade-in slide-in-from-top-1 ${
+            ticketNotice.isActive
+              ? "bg-emerald-50/80 border-emerald-200/80 text-emerald-800 shadow-xs"
+              : "bg-amber-50/90 border-amber-200/90 text-amber-900 shadow-xs"
+          }`}
+        >
+          <div
+            className={`flex h-10 w-10 items-center justify-center rounded-xl shrink-0 shadow-xs ${
+              ticketNotice.isActive
+                ? "bg-emerald-600 text-white"
+                : "bg-amber-500 text-white"
+            }`}
+          >
+            {ticketNotice.isActive ? (
+              <Megaphone size={20} className="animate-bounce" />
+            ) : (
+              <AlertCircle size={20} />
+            )}
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] font-black tracking-wide uppercase opacity-75">
+                اطلاعیه رویداد:
+              </span>
+            </div>
+            <p className="text-xs font-bold leading-relaxed mt-0.5 break-words">
+              {ticketNotice.message}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ۳. کارت جزئیات پیش‌فاکتور */}
       <div className="flex flex-col gap-3.5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
         {/* رویداد */}
         <div className="flex items-center justify-between text-xs">
@@ -118,7 +163,7 @@ export default function Payment_holder() {
         </div>
       </div>
 
-      {/* انتخاب درگاه زرین‌پال */}
+      {/* ۴. انتخاب درگاه زرین‌پال */}
       <button
         type="button"
         onClick={() => setSelectedGateway("zarinpal")}
@@ -153,7 +198,7 @@ export default function Payment_holder() {
         </div>
       </button>
 
-      {/* دکمه پرداخت آنلاین */}
+      {/* ۵. دکمه پرداخت آنلاین */}
       <button
         type="button"
         onClick={handlePayment}

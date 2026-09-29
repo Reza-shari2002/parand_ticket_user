@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { context } from "../../../context/Formcontext";
-import { profileSchema } from "../validation/profileSchema";
+import { compelete } from "../validation/profileSchema";
 import { updateProfileApi } from "../services/profileService";
 
 export default function useCompleteProfile(onClose) {
@@ -16,7 +16,7 @@ export default function useCompleteProfile(onClose) {
     formState: { errors, isSubmitting, isValid },
     reset,
   } = useForm({
-    resolver: yupResolver(profileSchema),
+    resolver: yupResolver(compelete),
     mode: "onChange",
     defaultValues: {
       full_name: "",

@@ -23,3 +23,8 @@ export const getMyTicketsApi = async () => {
   const { data } = await axiosInstance.get("/tickets/my-tickets");
   return data;
 };
+
+export const getGeneralSettingsApi = async () => {
+  const response = await axiosInstance.get("/Setting");
+  return response.data;
+};

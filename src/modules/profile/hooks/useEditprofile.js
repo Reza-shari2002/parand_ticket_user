@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { context } from "../../../context/Formcontext.jsx";
 import { getProfileApi, updateProfileApi } from "../services/profileService.js";
-import { profileSchema } from "../validation/profileSchema.js"; // ایمپورت اسکیما از فایل مجزا
+import { editprofileSchema} from "../validation/profileSchema.js"; // ایمپورت اسکیما از فایل مجزا
 
 export default function useEditprofile() {
   const { showToast } = useContext(context);
@@ -19,7 +19,7 @@ export default function useEditprofile() {
     reset,
     formState: { errors, isDirty, isValid },
   } = useForm({
-    resolver: yupResolver(profileSchema),
+    resolver: yupResolver(editprofileSchema),
     mode: "onChange",
     defaultValues: {
       full_name: "",
