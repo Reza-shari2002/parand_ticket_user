@@ -98,7 +98,7 @@ function Home_holder() {
 
           {/* لوگو اینماد */}
           <a
-            href="https://enamad.ir"
+            href="https://trustseal.enamad.ir/?id=584004&Code=FbSJaAzRqHblHHUgtbB8ZQ5glh9w7AbG"
             target="_blank"
             rel="noopener noreferrer"
             title="نماد اعتماد الکترونیکی"

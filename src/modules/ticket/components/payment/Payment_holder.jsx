@@ -158,7 +158,7 @@ export default function Payment_holder() {
             <span className="text-xl font-black">
               {Number(reserveData?.totalAmount || 0).toLocaleString("fa-IR")}
             </span>
-            <span className="text-xs font-bold text-gray-500">تومان</span>
+            <span className="text-xs font-bold text-gray-500">ریال</span>
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ export default function Payment_holder() {
         ) : (
           <span className="text-sm font-black">
             پرداخت آنلاین{" "}
-            {Number(reserveData?.totalAmount || 0).toLocaleString("fa-IR")} تومان
+            {Number(reserveData?.totalAmount || 0).toLocaleString("fa-IR")} ریال
           </span>
         )}
       </button>

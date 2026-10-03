@@ -1,13 +1,13 @@
 import React from "react";
 import { CheckCircle2, XCircle, Download, Ticket, Loader2 } from "lucide-react";
 import usePaymentStatus from "../../hooks/usePaymentStatus";
-// مسیر فایل events رو متناسب با ساختار پروژه‌ات تنظیم کن:
-import { events } from "../../../../utils/eventsData"; 
 
 export default function PaymentResult_holder() {
   const {
     loading,
     ticketData,
+    settings,
+    gamerTurnTime,
     isSuccess,
     errorMessage,
     ticketRef,
@@ -19,7 +19,7 @@ export default function PaymentResult_holder() {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center font-bold">
-        در حال بررسی وضعیت پرداخت...
+        در حال دریافت و بررسی وضعیت بلیط...
       </div>
     );
   }
@@ -32,7 +32,7 @@ export default function PaymentResult_holder() {
         <p className="text-gray-500 mb-8">{errorMessage}</p>
         <button
           onClick={handleBackHome}
-          className="w-full h-12 bg-gray-800 rounded-xl text-white font-bold"
+          className="w-full h-12 bg-gray-800 rounded-xl text-white font-bold cursor-pointer"
         >
           بازگشت به خانه
         </button>
@@ -40,19 +40,35 @@ export default function PaymentResult_holder() {
     );
   }
 
-  // ترجمه نوع بلیط
+  // ترجمه عنوان نوع بلیط
   const getTicketTypeLabel = (type) => {
-    if (type === "vip") return "VIP";
-    if (type === "regular") return "عادی";
-    if (type === "gamer") return "شرکت‌کننده (gamer)";
+    if (type === "vip") return "VIP (ویژه)";
+    if (type === "regular") return "عادی (عمومی)";
+    if (type === "gamer") return "بازیکن (شرکت‌کننده)";
     return type || "-";
   };
 
-  // پیدا کردن مشخصات رویداد متناسب با نوع بلیط
-  const eventInfo = events.find((e) => e.type === ticketData?.type);
-  const eventDate = eventInfo?.date || "۳۰ مهر ۱۴۰۵";
-  const eventTime = eventInfo?.time || "";
-  const eventDateTimeText = eventTime ? `${eventDate} | ساعت ${eventTime}` : eventDate;
+  // فرمت تاریخ و ساعت داینامیک از settings
+  const formatEventDateTime = (isoDate) => {
+    if (!isoDate) return "-";
+    try {
+      const date = new Date(isoDate);
+      return new Intl.DateTimeFormat("fa-IR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(date);
+    } catch {
+      return "-";
+    }
+  };
+
+  const ticketType = ticketData?.type;
+  const eventLocation = settings?.[`${ticketType}_location`] || "-";
+  const rawEventDate = settings?.[`${ticketType}_event_date`];
+  const eventDateTimeText = formatEventDateTime(rawEventDate);
 
   // وضعیت موفق
   return (
@@ -61,7 +77,7 @@ export default function PaymentResult_holder() {
         <CheckCircle2 size={70} className="text-emerald-500 mb-1" />
       </div>
 
-      {/* کارت اطلاعات بلیط - وصل شده به ref هوک */}
+      {/* کارت اطلاعات بلیط - مناسب خروجی PDF */}
       <div
         ref={ticketRef}
         className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm space-y-4"
@@ -79,10 +95,14 @@ export default function PaymentResult_holder() {
 
         <div className="border-t border-dashed my-2" />
 
-        <DetailRow label="نوع بلیط" value={getTicketTypeLabel(ticketData?.type)} />
-        
-        {/* ردیف جدید: تاریخ و زمان برگزاری رویداد */}
+        <DetailRow label="نوع بلیط" value={getTicketTypeLabel(ticketType)} />
+        <DetailRow label="مکان رویداد" value={eventLocation} />
         <DetailRow label="تاریخ و ساعت رویداد" value={eventDateTimeText} />
+
+        {/* فقط اگر زمان نوبت گیمر محاسبه شده بود نمایش داده می‌شود */}
+        {gamerTurnTime && (
+          <DetailRow label="ساعت حضور نوبت شما" value={gamerTurnTime} />
+        )}
 
         <DetailRow label="تعداد" value={`${ticketData?.quantity || 1} نفر`} />
         <DetailRow
@@ -114,11 +134,11 @@ export default function PaymentResult_holder() {
         />
       </div>
 
-      {/* دکمه دانلود */}
+      {/* دکمه دانلود PDF */}
       <button
         onClick={handleDownloadPdf}
         disabled={downloading}
-        className="flex items-center justify-center gap-3 w-full h-14 bg-blue-600 rounded-2xl text-white font-bold shadow-lg shadow-blue-200 active:scale-95 transition disabled:opacity-70"
+        className="flex items-center justify-center gap-3 w-full h-14 bg-blue-600 rounded-2xl text-white font-bold shadow-lg shadow-blue-200 active:scale-95 transition disabled:opacity-70 cursor-pointer"
       >
         {downloading ? (
           <>
@@ -137,8 +157,8 @@ export default function PaymentResult_holder() {
 }
 
 const DetailRow = ({ label, value }) => (
-  <div className="flex justify-between text-sm">
-    <span className="text-gray-400 font-bold">{label}:</span>
-    <span className="text-gray-800 font-black">{value}</span>
+  <div className="flex justify-between text-sm gap-2">
+    <span className="text-gray-400 font-bold shrink-0">{label}:</span>
+    <span className="text-gray-800 font-black text-left">{value}</span>
   </div>
 );

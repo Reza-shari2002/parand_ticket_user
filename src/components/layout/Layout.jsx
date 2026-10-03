@@ -82,7 +82,7 @@ function Layout({ children, hideNav = false, customTitle }) {
 
             <div className="relative w-20 flex justify-center h-full">
               <div className="absolute -top-0">
-                <button className="pointer-events-auto flex h-[64px] w-[64px] items-center justify-center rounded-full border-2 border-[#ef9f43] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)] transition-transform duration-200 active:scale-95">
+                <a href="https://core.parand.app/"><button className="pointer-events-auto flex h-[64px] w-[64px] items-center justify-center rounded-full border-2 border-[#ef9f43] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)] transition-transform duration-200 active:scale-95">
                   <svg
                     viewBox="0 0 75 45"
                     xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,8 @@ function Layout({ children, hideNav = false, customTitle }) {
                       fill="#F79520"
                     />
                   </svg>
-                </button>
+                </button></a>
+                
               </div>
             </div>
 

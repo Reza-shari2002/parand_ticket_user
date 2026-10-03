@@ -3,16 +3,21 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import { context } from "../../../context/Formcontext.jsx";
-import { getTicketDetailsApi } from "../services/reserveService.js";
+import {
+  getTicketDetailsApi,
+  getGeneralSettingsApi,
+} from "../services/reserveService.js";
+import { calculateSeatTime } from "../../../utils/seatTimeCalculator"; // مسیر تابع در common
 
 export default function usePaymentStatus() {
-  // ۱. تمام هوک‌ها دقیقاً در بالاترین سطح و با ترتیب ثابت
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { showToast } = useContext(context) || {};
 
   const [loading, setLoading] = useState(true);
   const [ticketData, setTicketData] = useState(null);
+  const [settings, setSettings] = useState(null);
+  const [gamerTurnTime, setGamerTurnTime] = useState(null);
   const [isSuccess, setIsSuccess] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [downloading, setDownloading] = useState(false);
@@ -26,27 +31,50 @@ export default function usePaymentStatus() {
     setIsSuccess(success);
 
     if (success && ticketId) {
-      fetchTicketDetails(ticketId);
+      fetchTicketAndSettings(ticketId);
     } else {
       setLoading(false);
       setErrorMessage("پرداخت شما با موفقیت انجام نشد.");
     }
   }, [searchParams]);
 
-  const fetchTicketDetails = async (ticketId) => {
+  const fetchTicketAndSettings = async (ticketId) => {
     try {
       setLoading(true);
-      const response = await getTicketDetailsApi(ticketId);
 
-      if (response.status === "success") {
-        setTicketData(response.data);
+      const [ticketRes, settingsRes] = await Promise.all([
+        getTicketDetailsApi(ticketId),
+        getGeneralSettingsApi().catch(() => null),
+      ]);
+
+      if (ticketRes.status === "success") {
+        const ticket = ticketRes.data;
+        setTicketData(ticket);
+
+        // اگر نوع بلیت گیمر بود، ساعت نوبت محاسبه می‌شود
+        if (ticket?.type === "gamer") {
+          const seatNumber = Array.isArray(ticket?.seats)
+            ? ticket.seats[0]
+            : ticket?.seats;
+
+          const turnTime = calculateSeatTime(seatNumber);
+          setGamerTurnTime(turnTime);
+        } else {
+          setGamerTurnTime(null);
+        }
       } else {
-        throw new Error(response.message || "خطا در دریافت اطلاعات بلیط");
+        throw new Error(ticketRes.message || "خطا در دریافت اطلاعات بلیط");
+      }
+
+      if (settingsRes) {
+        setSettings(settingsRes?.data ?? settingsRes);
       }
     } catch (err) {
       showToast?.(err.response?.data?.message || err.message, "error");
       setIsSuccess(false);
-      setErrorMessage(err.response?.data?.message || "مشکلی در دریافت بلیط پیش آمد");
+      setErrorMessage(
+        err.response?.data?.message || "مشکلی در دریافت اطلاعات بلیت پیش آمد"
+      );
     } finally {
       setLoading(false);
     }
@@ -54,7 +82,6 @@ export default function usePaymentStatus() {
 
   const handleBackHome = () => navigate("/home");
 
-  // متد خروجی PDF بدون مشکل oklch با html-to-image
   const handleDownloadPdf = async () => {
     if (!ticketRef.current) return;
 
@@ -63,10 +90,9 @@ export default function usePaymentStatus() {
 
       const element = ticketRef.current;
 
-      // ساخت تصویر با پشتیبانی کامل از استایل‌ها و فونت‌ها
       const imgData = await toPng(element, {
         quality: 0.98,
-        pixelRatio: 3, // کیفیت بالا جهت چاپ
+        pixelRatio: 3,
         backgroundColor: "#ffffff",
       });
 
@@ -80,7 +106,6 @@ export default function usePaymentStatus() {
       const margin = 15;
       const contentWidth = pdfWidth - margin * 2;
 
-      // خواندن ابعاد المان واقعی برای حفظ نسبت طول و عرض در PDF
       const elWidth = element.offsetWidth || 350;
       const elHeight = element.offsetHeight || 400;
       const contentHeight = (elHeight * contentWidth) / elWidth;
@@ -102,6 +127,8 @@ export default function usePaymentStatus() {
   return {
     loading,
     ticketData,
+    settings,
+    gamerTurnTime,
     isSuccess,
     errorMessage,
     ticketRef,

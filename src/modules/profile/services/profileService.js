@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance";
+import axiosInstance from "../../../components/commonService/axiosInstance";
 
 export const updateProfileApi = async (data) => {
   try {

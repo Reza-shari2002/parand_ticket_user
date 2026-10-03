@@ -39,7 +39,7 @@ function Reserve_holder() {
 
           <div className="pt-1">
             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 font-extrabold text-xs rounded-xl">
-              {formatPrice(ticketInfo.price)} تومان برای هر نفر
+              {formatPrice(ticketInfo.price)} ریال برای هر نفر
             </span>
           </div>
         </div>
@@ -104,7 +104,7 @@ function Reserve_holder() {
             <Wallet size={20} />
           </div>
           <span className="px-4 py-2 bg-blue-50 text-blue-600 font-black text-sm rounded-2xl">
-            {formatPrice(totalAmount)} تومان
+            {formatPrice(totalAmount)} ریال
           </span>
         </div>
       </div>
