@@ -132,7 +132,7 @@ function SelectTicket_holder() {
 
                 <div className="mt-2.5 pt-1.5 border-t border-slate-100/80 flex items-center justify-between">
                   <span className="text-[10px] text-gray-400 font-bold">
-                    قیمت بلیت:
+                    قیمت بلیط :
                   </span>
                   <span className="px-2 py-0.5 bg-blue-50 text-blue-600 font-black text-xs rounded-lg border border-blue-100/60">
                     {formatPrice(ticketPrices[item.id])}
