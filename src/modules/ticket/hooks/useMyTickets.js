@@ -4,7 +4,7 @@ import {
   getGeneralSettingsApi,
 } from "../services/reserveService";
 import { context } from "../../../context/Formcontext.jsx";
-import { calculateSeatTime } from "../../../utils/seatTimeCalculator"; // یا مسیر فایل seatTimeCalculator
+import { calculateSeatTime } from "../../../utils/seatTimeCalculator";
 
 export default function useMyTickets() {
   const [tickets, setTickets] = useState([]);

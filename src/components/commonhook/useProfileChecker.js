@@ -9,7 +9,6 @@ export default function useProfileChecker() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
 
-  // بررسی وضعیت پروفایل و اعتبار توکن به محض ماونت
   const checkUserProfile = async () => {
     setIsLoading(true);
     const result = await getProfileApi();
@@ -18,7 +17,6 @@ export default function useProfileChecker() {
       const user = result.data?.data?.user;
       setUserProfile(user);
 
-      // اگر فول‌نیم یا کد ملی نال/خالی بود، مودال تکمیل اطلاعات باز شود
       if (!user?.full_name ) {
         setShowProfileModal(true);
       }

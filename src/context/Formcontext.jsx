@@ -4,7 +4,7 @@ export const context = createContext();
 
 function Formcontext({ children }) {
   const [data, set_data] = useState({});
-  const [current_page, set_current_page] = useState(0);
+  const [current_page, set_current_page] = useState("/home");
   const [captchaToken, set_captcha_token] = useState("");
   const [phone_number, set_phone_number] = useState("");
   const [otp, set_otp] = useState("");

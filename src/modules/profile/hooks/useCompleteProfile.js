@@ -8,7 +8,7 @@ import { updateProfileApi } from "../services/profileService";
 
 export default function useCompleteProfile(onClose) {
   const navigate = useNavigate();
-  const { showToast } = useContext(context);
+  const { showToast , current_page } = useContext(context);
 
   const {
     register,
@@ -31,7 +31,7 @@ export default function useCompleteProfile(onClose) {
       showToast(result.data?.message || "اطلاعات با موفقیت ثبت شد.", "success");
       reset();
       if (onClose) onClose();
-      navigate("/home");
+      navigate(current_page);
     } else {
       showToast(result.error, "error");
     }
