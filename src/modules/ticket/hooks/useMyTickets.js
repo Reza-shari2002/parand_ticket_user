@@ -1,5 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { getMyTicketsApi, getGeneralSettingsApi } from "../services/reserveService";
+import {
+  getMyTicketsApi,
+  getGeneralSettingsApi,
+} from "../services/reserveService";
 import { context } from "../../../context/Formcontext.jsx";
 import { calculateSeatTime } from "../../../utils/seatTimeCalculator"; // یا مسیر فایل seatTimeCalculator
 
@@ -15,7 +18,7 @@ export default function useMyTickets() {
     try {
       const date = new Date(isoDate);
       return new Intl.DateTimeFormat("fa-IR", {
-        year: "numeric",
+        timeZone: "UTC", // جلوگیری از اعمال مجدد اختلاف زمانی ۳:۳۰        year: "numeric",
         month: "long",
         day: "numeric",
         hour: "2-digit",
@@ -36,7 +39,8 @@ export default function useMyTickets() {
       ]);
 
       if (ticketsRes.success && Array.isArray(ticketsRes.data?.tickets)) {
-        const settings = settingsRes?.data?.settings ?? settingsRes?.data ?? settingsRes ?? {};
+        const settings =
+          settingsRes?.data?.settings ?? settingsRes?.data ?? settingsRes ?? {};
 
         const preparedTickets = ticketsRes.data.tickets.map((ticket) => {
           const type = ticket.type;
@@ -62,7 +66,8 @@ export default function useMyTickets() {
         throw new Error(ticketsRes.message || "خطا در دریافت لیست بلیط‌ها");
       }
     } catch (err) {
-      const errMsg = err.response?.data?.message || err.message || "خطایی رخ داد";
+      const errMsg =
+        err.response?.data?.message || err.message || "خطایی رخ داد";
       showToast?.(errMsg, "error");
     } finally {
       setLoading(false);

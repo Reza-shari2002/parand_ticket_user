@@ -54,6 +54,7 @@ export default function PaymentResult_holder() {
     try {
       const date = new Date(isoDate);
       return new Intl.DateTimeFormat("fa-IR", {
+        timeZone: "UTC", // جلوگیری از اعمال مجدد اختلاف زمانی ۳:۳۰        year: "numeric",
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -113,8 +114,14 @@ export default function PaymentResult_holder() {
               : ticketData?.seats || "-"
           }
         />
-        <DetailRow label="نام خریدار" value={ticketData?.user?.fullName || "-"} />
-        <DetailRow label="کد ملی" value={ticketData?.user?.nationalCode || "-"} />
+        <DetailRow
+          label="نام خریدار"
+          value={ticketData?.user?.fullName || "-"}
+        />
+        <DetailRow
+          label="کد ملی"
+          value={ticketData?.user?.nationalCode || "-"}
+        />
         <DetailRow label="شماره تماس" value={ticketData?.user?.phone || "-"} />
         <DetailRow
           label="مبلغ کل پرداخت شده"

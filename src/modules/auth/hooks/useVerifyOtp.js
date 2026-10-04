@@ -7,7 +7,7 @@ import { verifyOtpApi } from "../services/VerifyOtpservice";
 import { sendOtpApi } from "../services/SendOtpservice";
 import verifyOtpSchema from "../validation/verifyOtpSchema";
 
-const RESEND_TIMER = 180; // ۳ دقیقه
+const RESEND_TIMER = 120; // ۳ دقیقه
 
 export default function useVerifyOtp() {
   const navigate = useNavigate();

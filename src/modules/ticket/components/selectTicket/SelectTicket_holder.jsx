@@ -53,6 +53,7 @@ function SelectTicket_holder() {
     try {
       const date = new Date(isoDate);
       return new Intl.DateTimeFormat("fa-IR", {
+        timeZone: "UTC", // جلوگیری از اعمال مجدد اختلاف زمانی ۳:۳۰
         month: "short",
         day: "numeric",
         hour: "2-digit",
@@ -118,7 +119,9 @@ function SelectTicket_holder() {
                   <div className="mt-1 flex flex-col gap-0.5 text-[10.5px] text-gray-500">
                     <div className="flex items-center gap-1 truncate">
                       <span className="text-gray-400">📍</span>
-                      <span className="truncate">{location || "مکان نامشخص"}</span>
+                      <span className="truncate">
+                        {location || "مکان نامشخص"}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1 truncate">
                       <span className="text-gray-400">🕒</span>
@@ -128,7 +131,9 @@ function SelectTicket_holder() {
                 </div>
 
                 <div className="mt-2.5 pt-1.5 border-t border-slate-100/80 flex items-center justify-between">
-                  <span className="text-[10px] text-gray-400 font-bold">قیمت بلیت:</span>
+                  <span className="text-[10px] text-gray-400 font-bold">
+                    قیمت بلیت:
+                  </span>
                   <span className="px-2 py-0.5 bg-blue-50 text-blue-600 font-black text-xs rounded-lg border border-blue-100/60">
                     {formatPrice(ticketPrices[item.id])}
                   </span>
