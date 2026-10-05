@@ -17,6 +17,7 @@ import NotFound from "../modules/not-found/pages/NotFound";
 import Payment from "../modules/ticket/pages/Payment";
 import PaymentResult from "../modules/ticket/pages/PaymentResult";
 import Myticket from "../modules/ticket/pages/Myticket";
+import Information from "../modules/Information/pages/Information";
 function App() {
   const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ function App() {
     { path: "/my-tickets", element: <Myticket></Myticket> },
     { path: "/login", element: <Login></Login> },
     { path: "/verify", element: <Verify_otp></Verify_otp> },
-
+    {path:"/Information" , element : <Information></Information>},
     { path: "/Contact-us", element: <Contact_us></Contact_us> },
 
     { path: "*", element: <NotFound /> },

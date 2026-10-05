@@ -11,7 +11,7 @@ const RESEND_TIMER = 120; // ۳ دقیقه
 
 export default function useVerifyOtp() {
   const navigate = useNavigate();
-  const { phone_number, set_otp, showToast } = useContext(context);
+  const { phone_number, set_otp, showToast , current_page} = useContext(context);
   const [timeLeft, setTimeLeft] = useState(RESEND_TIMER);
   const [isResending, setIsResending] = useState(false);
   const inputRef = useRef(null);
@@ -69,7 +69,7 @@ export default function useVerifyOtp() {
         localStorage.setItem("accesstoken", result.data.accesstoken);
       }
       showToast("ورود با موفقیت انجام شد", "success");
-      navigate("/home");
+      navigate(current_page);
     } else {
       showToast(result.error || "کد وارد شده صحیح نمی‌باشد", "error");
       reset({ otp: "" });

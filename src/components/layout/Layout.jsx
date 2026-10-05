@@ -119,7 +119,7 @@ function Layout({ children, hideNav = false, customTitle }) {
 
             <div className="flex flex-1 justify-around items-center h-full">
               <Link
-                to="/info"
+                to="/Information"
                 className={`flex flex-col items-center gap-1 ${
                   isActive("/info") ? "text-[#8B9EFF]" : "text-gray-400"
                 }`}

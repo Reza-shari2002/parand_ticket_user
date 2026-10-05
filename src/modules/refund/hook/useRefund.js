@@ -20,7 +20,6 @@ export default function useRefund({ ticket_id, onClose, onSuccess }) {
     defaultValues: {
       full_name: "",
       national_code: "",
-      iban: "IR",
       card_number: "",
     },
   });
@@ -31,14 +30,16 @@ export default function useRefund({ ticket_id, onClose, onSuccess }) {
       ticket_id: Number(ticket_id),
       full_name: formData.full_name.trim(),
       national_code: formData.national_code.trim(),
-      iban: formData.iban.toUpperCase().replace(/\s/g, ""),
-      card_number: formData.card_number.replace(/[\s-]/g, ""),
+      card_number: formData.card_number.trim(),
     };
 
     const result = await refundApi(payload);
 
     if (result.success) {
-      showToast?.(result.data?.message || "درخواست استرداد با موفقیت ثبت شد.", "success");
+      showToast?.(
+        result.data?.message || "درخواست استرداد با موفقیت ثبت شد.",
+        "success",
+      );
       reset();
       if (onSuccess) onSuccess();
       if (onClose) onClose();

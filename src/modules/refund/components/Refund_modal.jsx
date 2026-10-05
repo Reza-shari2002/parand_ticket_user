@@ -44,7 +44,6 @@ export default function Refund_holder({ ticket_id, onClose, onSuccess }) {
           </button>
         </div>
 
-        {/* مرحله اول: اخطار و سوال اولیه */}
         {step === "confirm" && (
           <div className="space-y-4 py-2 text-center" dir="rtl">
             <div className="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mx-auto">
@@ -80,7 +79,6 @@ export default function Refund_holder({ ticket_id, onClose, onSuccess }) {
           </div>
         )}
 
-        {/* مرحله دوم: فرم اطلاعات بانکی */}
         {step === "form" && (
           <form onSubmit={handleSubmit} className="space-y-3" dir="rtl">
             {/* نام و نام خانوادگی */}
@@ -119,25 +117,7 @@ export default function Refund_holder({ ticket_id, onClose, onSuccess }) {
               )}
             </div>
 
-            {/* شماره شبا */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold text-gray-600">
-                شماره شبا (با IR)
-              </label>
-              <input
-                type="text"
-                maxLength={26}
-                dir="ltr"
-                {...register("iban")}
-                placeholder="IR120170000000123456789012"
-                className="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition font-mono uppercase"
-              />
-              {errors.iban && (
-                <span className="text-[10px] text-red-500 font-bold">
-                  {errors.iban.message}
-                </span>
-              )}
-            </div>
+
 
             {/* شماره کارت */}
             <div className="space-y-1">
@@ -149,7 +129,7 @@ export default function Refund_holder({ ticket_id, onClose, onSuccess }) {
                 maxLength={19}
                 dir="ltr"
                 {...register("card_number")}
-                placeholder="6037-9971-2345-6789"
+                placeholder="6037997123456789"
                 className="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition font-mono"
               />
               {errors.card_number && (

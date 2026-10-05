@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import useLogin from "../hooks/useLogin";
 
 function Login_holder() {
@@ -57,7 +58,7 @@ function Login_holder() {
           </div>
 
           {/* لینک قوانین و مقررات */}
-          <p className="text-xs text-gray-400 text-center">
+          <Link to="/Information"><p className="text-xs text-gray-400 text-center">
             با ورود،{" "}
             <button
               type="button"
@@ -66,7 +67,8 @@ function Login_holder() {
               قوانین و مقررات
             </button>{" "}
             را می‌پذیرم
-          </p>
+          </p></Link>
+          
 
           {/* دکمه ادامه (درست زیر اینپوت و قوانین) */}
           <div className="w-full mt-2">

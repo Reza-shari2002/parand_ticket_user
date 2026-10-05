@@ -151,7 +151,7 @@ function SelectTicket_holder() {
           onClick={handleContinue}
           className="w-full h-13 py-3.5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-extrabold text-base rounded-2xl shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center cursor-pointer"
         >
-          ادامه و انتخاب سانس / صندلی
+          ادامه
         </button>
       </div>
     </div>
