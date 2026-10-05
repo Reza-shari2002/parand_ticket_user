@@ -121,7 +121,7 @@ function Layout({ children, hideNav = false, customTitle }) {
               <Link
                 to="/Information"
                 className={`flex flex-col items-center gap-1 ${
-                  isActive("/info") ? "text-[#8B9EFF]" : "text-gray-400"
+                  isActive("/Information") ? "text-[#8B9EFF]" : "text-gray-400"
                 }`}
               >
                 <Info size={22} />

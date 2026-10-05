@@ -106,7 +106,7 @@ export default function usePayment() {
 
     if (!ticketId) {
       showToast?.("اطلاعات رزرو یافت نشد. لطفاً مجدداً تلاش کنید.", "error");
-      navigate("/select-ticket");
+      navigate("/Selectticket");
       return;
     }
 
