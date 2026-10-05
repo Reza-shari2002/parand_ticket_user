@@ -168,7 +168,7 @@ export default function TicketDetailsModal({ ticket, onClose }) {
             label="مبلغ کل"
             value={`${Number(ticket.total_amount || 0).toLocaleString(
               "fa-IR"
-            )} تومان`}
+            )} ریال`}
           />
 
           <DetailRow
