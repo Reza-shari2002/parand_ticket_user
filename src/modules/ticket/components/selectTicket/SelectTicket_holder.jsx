@@ -65,8 +65,8 @@ function SelectTicket_holder() {
   };
 
   return (
-    <div className="w-full max-w-[430px] mx-auto px-4 py-4 flex flex-col min-h-[calc(100vh-80px)] pb-28 select-none">
-      <div className="space-y-3.5 w-full">
+    <div className="w-full max-w-[430px] mx-auto px-4 py-3 flex flex-col min-h-[calc(100vh-80px)] pb-28 select-none">
+      <div className="space-y-3 w-full">
         {ticketOptions.map((item) => {
           const isSelected = selectedType === item.id;
           const location = settings?.[`${item.id}_location`];
@@ -83,17 +83,17 @@ function SelectTicket_holder() {
               }`}
             >
               {/* بخش ۱/۳: تصویر */}
-              <div className="w-1/3 min-w-[110px] bg-slate-50 p-3 flex items-center justify-center border-l border-slate-100">
+              <div className="w-1/3 min-w-[100px] bg-slate-50 p-2 flex items-center justify-center border-l border-slate-100">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-20 object-contain drop-shadow-sm"
+                  className="w-full h-16 object-contain drop-shadow-sm"
                 />
               </div>
 
               {/* بخش ۲/۳: اطلاعات متنی، زمان/مکان و قیمت */}
-              <div className="w-2/3 p-3.5 flex flex-col justify-between min-w-0">
-                <div className="flex flex-col gap-1 min-w-0">
+              <div className="w-2/3 p-2.5 flex flex-col justify-between min-w-0">
+                <div className="flex flex-col gap-0.5 min-w-0">
                   <div className="flex items-center justify-between gap-1">
                     <h2 className="text-sm font-black text-gray-800 truncate">
                       {item.title}
@@ -116,7 +116,7 @@ function SelectTicket_holder() {
                     {item.desc}
                   </p>
 
-                  <div className="mt-1 flex flex-col gap-0.5 text-[10.5px] text-gray-500">
+                  <div className="mt-0.5 flex flex-col gap-0 text-[10.5px] text-gray-500">
                     <div className="flex items-center gap-1 truncate">
                       <span className="text-gray-400">📍</span>
                       <span className="truncate">
@@ -130,7 +130,7 @@ function SelectTicket_holder() {
                   </div>
                 </div>
 
-                <div className="mt-2.5 pt-1.5 border-t border-slate-100/80 flex items-center justify-between">
+                <div className="mt-1.5 pt-1 border-t border-slate-100/80 flex items-center justify-between">
                   <span className="text-[10px] text-gray-400 font-bold">
                     قیمت بلیط :
                   </span>
@@ -145,11 +145,11 @@ function SelectTicket_holder() {
       </div>
 
       {/* دکمه اقدام */}
-      <div className="mt-6 w-full">
+      <div className="mt-4 w-full">
         <button
           type="button"
           onClick={handleContinue}
-          className="w-full h-13 py-3.5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-extrabold text-base rounded-2xl shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center cursor-pointer"
+          className="w-full h-12 py-3 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-extrabold text-base rounded-2xl shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center cursor-pointer"
         >
           ادامه
         </button>
