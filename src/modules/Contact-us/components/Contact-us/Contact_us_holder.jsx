@@ -16,7 +16,6 @@ function Contact_us_holder() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 items-stretch">
           {/* Map */}
 
-
           {/* Contact Card */}
           <div className="rounded-[1.75rem] bg-[#FDF0D5] border border-orange-100 shadow-sm p-5 md:p-8 flex flex-col justify-between">
             <div className="space-y-6">
@@ -47,6 +46,12 @@ function Contact_us_holder() {
                   >
                     ۰۶۱-۹۱۰۱۲۳۰۰
                   </a>
+                  <a
+                    href="tel:09389431694"
+                    className="text-lg md:text-xl font-bold text-gray-900 hover:text-orange-500 transition-colors tracking-wider"
+                  >
+                    ۰۹۳۸۹۴۳۱۶۹۴
+                  </a>
                 </div>
               </div>
 
@@ -76,6 +81,12 @@ function Contact_us_holder() {
                     className="text-lg md:text-xl font-bold text-gray-900 break-all hover:text-orange-500 transition-colors"
                   >
                     Info@parand.app
+                  </a>
+                  <a
+                    href="Parand.app@iran.ir"
+                    className="text-lg md:text-xl font-bold text-gray-900 break-all hover:text-orange-500 transition-colors"
+                  >
+                    Parand.app@iran.ir
                   </a>
                 </div>
               </div>
