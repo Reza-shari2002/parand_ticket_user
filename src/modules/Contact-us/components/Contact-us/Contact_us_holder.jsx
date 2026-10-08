@@ -46,6 +46,7 @@ function Contact_us_holder() {
                   >
                     ۰۶۱-۹۱۰۱۲۳۰۰
                   </a>
+                  <hr />
                   <a
                     href="tel:09389431694"
                     className="text-lg md:text-xl font-bold text-gray-900 hover:text-orange-500 transition-colors tracking-wider"
@@ -82,6 +83,7 @@ function Contact_us_holder() {
                   >
                     Info@parand.app
                   </a>
+                  <hr />
                   <a
                     href="Parand.app@iran.ir"
                     className="text-lg md:text-xl font-bold text-gray-900 break-all hover:text-orange-500 transition-colors"
