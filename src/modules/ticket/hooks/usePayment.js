@@ -101,6 +101,7 @@ export default function usePayment() {
   };
 
   // ارسال درخواست شروع پرداخت
+   // ارسال درخواست شروع پرداخت
   const handlePayment = async () => {
     const ticketId = reserveData?.ticketId;
 
@@ -120,8 +121,11 @@ export default function usePayment() {
       const data = await requestPaymentApi(ticketId);
 
       if (data.status === "success" && data.data?.paymentUrl) {
-        // انتقال مستقیم به درگاه پرداخت زرین‌پال
-        window.location.href = data.data.paymentUrl;
+        if (window.top) {
+          window.top.location.href = data.data.paymentUrl;
+        } else {
+          window.location.href = data.data.paymentUrl;
+        }
       } else {
         showToast?.(data.message || "خطا در برقراری ارتباط با درگاه پرداخت", "error");
       }
